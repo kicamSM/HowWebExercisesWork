@@ -1,0 +1,170 @@
+Part One: Solidify Terminology
+In your own terms, define the following terms:
+
+What is HTTP?
+HTTP (Hypertext Transfer Protocol) is used to send requests to a server and used to load pages. In other words how browsers and servers communicate 
+
+What is a URL?
+A URL is a reference or address to a resource on the internet 
+
+What is DNS?
+DNS (Domain Name System) takes the host name and translates it into a IP adress or vice versa.
+
+What is a query string?
+A query string is a  part of a URL which is additional information. Multiple arguements are seperated by &. Also, I believe that it contains a ? 
+
+What are two HTTP verbs and how are they different?
+Post and get are methods. Post sends information to a server to be saved like a facebook post etc. Get provides a reference and acquires information from a server. Many times this are URLs. 
+
+What is an HTTP request?
+An HTTP request is a request for specific information from the server and contains metadata. 
+
+What is an HTTP response?
+An HTTP response is whatever information the server sends in response to that request.
+
+What is an HTTP header? Give a couple examples of request and response headers you have seen. A hostname woudl be a tupe of header and identifies a device connected to a network. Another example would be the language your browser whats the information in such as English French etc.. 
+
+What are the processes that happen when you type “http://somesite.com/some/page.html” into a browser?
+You are turning the hostname into the IP address and connecting to that IP address using the default port. You are also using the HTTP protocol. You are requesting a specific page ie /some/page/.html
+
+----------------------------------------------------------
+
+Part Two: Practice Tools
+
+Using curl, make a GET request to the icanhazdadjoke.com API to find all jokes involving the word “pirate”
+curl https://icanhazdadjoke.com/search?term=pirate
+
+
+Use dig to find what the IP address is for icanhazdadjoke.com
+dig icanhazdadjoke.com 172.67.198.173
+
+Make a simple web page and serve it using python3 -m http.server. Visit the page in a browser.
+
+python -m http.server 
+
+http://localhost:8000/BasicWeb.html
+
+Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
+127.0.0.1 - - [09/Feb/2023 14:05:35] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2023 14:05:35] code 404, message File not found
+127.0.0.1 - - [09/Feb/2023 14:05:35] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [09/Feb/2023 14:06:29] "GET /BasicWeb.html HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2023 14:06:29] "GET /BasicWeb.css HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2023 14:06:29] "GET /BasicWeb.js HTTP/1.1" 200 -
+127.0.0.1 - - [09/Feb/2023 14:07:32] "GET /BasicWeb.html HTTP/1.1" 304 -
+127.0.0.1 - - [09/Feb/2023 14:07:32] "GET /BasicWeb.css HTTP/1.1" 304 -
+
+----------------------------------------------------------
+
+Part Three: Explore Dev Tools
+
+Build a very simple HTML form that uses the GET method (it can use the same page URL for the action) when the form is submitted.
+
+<!DOCTYPE html>
+<html lang="en">
+    <link href="BasicWeb.css" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Web</title>
+</head>
+<h1>Basic Web</h1>
+<body>
+    <form action="" method="get" class="form-class">
+        <div class="form-class">
+            <label for="position">Enter blocker or jammer</label>
+            <input type="text" name="position" id="position" required>
+          </div>
+    </form>
+    <script src="BasicWeb.js"></script>
+</body>
+</html>4
+
+Add a field or two to the form and, after submitting it, explore in Chrome Developer tools how you can view the request and response headers.
+
+	
+3 requests
+725 B transferred
+725 B resources
+Finish: 18 ms
+DOMContentLoaded: 21 ms
+Request URL: file:///C:/Users/kicaM/OneDrive/Desktop/Springboard/Basic%20Website/BasicWeb.html?position=jammer
+Request Method: GET
+Status Code: 200 OK
+Referrer Policy: strict-origin-when-cross-origin
+Content-Type: text/html
+Last-Modified: Thu, 09 Feb 2023 21:26:45 GMT
+Provisional headers are shown
+Learn more
+sec-ch-ua: "Not_A Brand";v="99", "Google Chrome";v="109", "Chromium";v="109"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+
+1)Click Inspect
+2) go to network
+3) click your html
+4) they will be listed in "General", "Response Headers", and "Request Headers" 
+
+Edit the page to change the form type to POST, refresh in the browser and re-submit. Do you still see the field in the query string? Explore in Chrome how you can view the request and response headers, as well as the form data.
+
+file:///C:/Users/kicaM/OneDrive/Desktop/Springboard/Basic%20Website/BasicWeb.html
+
+The field is not in the query string. 
+
+<!DOCTYPE html>
+<html lang="en">
+    <link href="BasicWeb.css" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Web</title>
+</head>
+<h1>Basic Web</h1>
+<body>
+    <form action="" method="post" class="form-class">
+        <div class="form-class">
+            <label for="position">Enter blocker or jammer</label>
+            <input type="text" name="position" id="position" required>
+          </div>
+    </form>
+    <script src="BasicWeb.js"></script>
+</body>
+</html>
+
+DocumentBasicWeb.html	StylesheetBasicWeb.css	ScriptBasicWeb.js	
+3 requests
+726 B transferred
+726 B resources
+Finish: 12 ms
+DOMContentLoaded: 14 ms
+Request URL: file:///C:/Users/kicaM/OneDrive/Desktop/Springboard/Basic%20Website/BasicWeb.html
+Request Method: POST
+Status Code: 200 OK
+Referrer Policy: strict-origin-when-cross-origin
+Content-Type: text/html
+Last-Modified: Thu, 09 Feb 2023 21:32:51 GMT
+Provisional headers are shown
+Learn more
+Content-Type: application/x-www-form-urlencoded
+Origin: null
+sec-ch-ua: "Not_A Brand";v="99", "Google Chrome";v="109", "Chromium";v="109"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+
+Can still view everything using inspect, network, resubmitting page, and then clicking on the html 
+
+----------------------------------------------------------
+Part Four: Explore the URL API
+At times, it’s useful for your JavaScript to look at the URL of the browser window and change how the script works depending on parts of that (particularly the query string).
+
+Read about the URL API
+
+https://developer.mozilla.org/en-US/docs/Web/API/URL
+
+
+Try some of the code examples in the Chrome Console so that you can get comfortable with the basic methods and properties for instances of the URL class.
+
+completed this took some notes. 
